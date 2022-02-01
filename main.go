@@ -42,7 +42,7 @@ type InfoVal struct {
 }
 
 func main() {
-	bot, err := tgbotapi.NewBotAPI(goDotEnvVariable("TELEGRAM_APITOKEN"))
+	bot, err := tgbotapi.NewBotAPI(goDotEnvVariable("TOKEN_TLG"))
 	if err != nil {
 		fmt.Println(err)
 	}
