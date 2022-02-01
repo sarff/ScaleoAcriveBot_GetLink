@@ -66,7 +66,8 @@ func main() {
 			//msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "great job")
 			link := return_link(msg.ChatID) // If the message was open, add a copy of our numeric keyboard.
-			if time.Now().UTC().Hour() <= 18 && time.Now().UTC().Hour() >= 8 {
+			weekday := int(time.Now().Weekday())
+			if time.Now().UTC().Hour() <= 18 && time.Now().UTC().Hour() >= 8 && weekday != 0 && weekday != 6 {
 				//fmt.Println(time.Now().UTC().Hour())
 				switch strings.ToUpper(update.Message.Text) {
 				case "LOGIN":
