@@ -2,13 +2,11 @@ package main
 
 import (
 	"fmt"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/joho/godotenv"
 	"log"
 	"os"
 	"strings"
-	"time"
-
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
 func goDotEnvVariable(key string) string {
@@ -66,26 +64,26 @@ func main() {
 			//msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "great job")
 			link := return_link(msg.ChatID) // If the message was open, add a copy of our numeric keyboard.
-			weekday := int(time.Now().Weekday())
-			if time.Now().UTC().Hour() <= 16 && time.Now().UTC().Hour() >= 6 && weekday != 0 && weekday != 6 {
-				//fmt.Println(time.Now().UTC().Hour())
-				switch strings.ToUpper(update.Message.Text) {
-				case "LOGIN":
-					msg.Text = link
-				case "/START":
-					msg.Text = "enter your password"
-				default:
-					msg.Text = "nope"
-				}
-
-				// Send the message.
-				if _, err = bot.Send(msg); err != nil {
-					fmt.Println(err)
-				}
-			} else {
-				msg.Text = "the link is only available during business hours"
-				bot.Send(msg)
+			//	weekday := int(time.Now().Weekday())
+			//	if time.Now().UTC().Hour() <= 16 && time.Now().UTC().Hour() >= 6 && weekday != 0 && weekday != 6 {
+			//fmt.Println(time.Now().UTC().Hour())
+			switch strings.ToUpper(update.Message.Text) {
+			case "LOGIN":
+				msg.Text = link
+			case "/START":
+				msg.Text = "enter your password"
+			default:
+				msg.Text = "nope"
 			}
+
+			// Send the message.
+			if _, err = bot.Send(msg); err != nil {
+				fmt.Println(err)
+			}
+			// 			} else {
+			// 				msg.Text = "the link is only available during business hours"
+			// 				bot.Send(msg)
+			// 			}
 		}
 	}
 }
